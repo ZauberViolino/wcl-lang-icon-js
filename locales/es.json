@@ -1,0 +1,29 @@
+{
+  "meta": { "code": "es", "name": "español", "htmlLang": "es" },
+  "title": "Generador de iconos WCL para idiomas",
+  "subtitle": "Escribe un código de idioma para generar su icono SVG en tiempo real.",
+  "labelCode": "Código de idioma",
+  "placeholder": "p.ej. zh o be-tarask",
+  "btnGenerate": "Generar",
+  "btnDownload": "Descargar SVG",
+  "btnCopy": "Copiar código SVG",
+  "langSwitcherLabel": "Idioma de la interfaz",
+  "status": {
+    "loadingFont": "Cargando fuentes…",
+    "ready": "Listo",
+    "idleEmpty": "Escribe un código para generar automáticamente",
+    "idleFontLoaded": "Fuentes cargadas, escribe un código para generar automáticamente",
+    "continueSubtag": "Sigue escribiendo el subtag…",
+    "generated": "Icono generado para \"{code}\"",
+    "copySuccess": "Código SVG copiado al portapapeles",
+    "copyFail": "Error al copiar, selecciona el texto manualmente"
+  },
+  "errors": {
+    "codeTooLong": "El código supera el límite ({len}/4)",
+    "glyphMissing": "La fuente no admite el carácter: \"{ch}\"",
+    "primaryTooLong": "La etiqueta principal supera el límite ({len}/4)",
+    "extendedFormat": "El código extendido debe ser \"primary-subtag\", p.ej. be-tarask",
+    "subtagTooLong": "El subtag \"{subtag}\" es demasiado largo incluso después de ajustar y reducir",
+    "fontLoadFailed": "Error al cargar la fuente: {err}"
+  }
+}
