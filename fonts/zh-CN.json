@@ -1,0 +1,29 @@
+{
+  "meta": { "code": "zh-CN", "name": "中文（简体）", "htmlLang": "zh-CN" },
+  "title": "WCL 语言图标生成器",
+  "subtitle": "输入语言代码，实时生成对应的 SVG 图标。",
+  "labelCode": "语言代码",
+  "placeholder": "例如 zh 或 be-tarask",
+  "btnGenerate": "生成",
+  "btnDownload": "下载 SVG",
+  "btnCopy": "复制 SVG 代码",
+  "langSwitcherLabel": "界面语言",
+  "status": {
+    "loadingFont": "加载字体中…",
+    "ready": "就绪",
+    "idleEmpty": "输入代码后自动生成",
+    "idleFontLoaded": "字体已加载，输入代码后自动生成",
+    "continueSubtag": "继续输入子标签…",
+    "generated": "已生成 \"{code}\" 的图标",
+    "copySuccess": "SVG 代码已复制到剪贴板",
+    "copyFail": "复制失败，请手动选择文本"
+  },
+  "errors": {
+    "codeTooLong": "代码长度超过上限（{len}/4）",
+    "glyphMissing": "字体不支持字符：\"{ch}\"",
+    "primaryTooLong": "主标签长度超过上限（{len}/4）",
+    "extendedFormat": "扩展代码格式应为 \"主标签-子标签\"，例如 be-tarask",
+    "subtagTooLong": "子标签 \"{subtag}\" 太长，压缩+缩小后仍放不下",
+    "fontLoadFailed": "字体加载失败：{err}"
+  }
+}

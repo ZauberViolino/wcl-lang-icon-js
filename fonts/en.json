@@ -1,0 +1,29 @@
+{
+  "meta": { "code": "en", "name": "English", "htmlLang": "en" },
+  "title": "WCL Language Icon Generator",
+  "subtitle": "Type a language code to generate its SVG icon in real time.",
+  "labelCode": "Language code",
+  "placeholder": "e.g. zh or be-tarask",
+  "btnGenerate": "Generate",
+  "btnDownload": "Download SVG",
+  "btnCopy": "Copy SVG code",
+  "langSwitcherLabel": "Interface language",
+  "status": {
+    "loadingFont": "Loading fonts…",
+    "ready": "Ready",
+    "idleEmpty": "Type a code to auto-generate",
+    "idleFontLoaded": "Fonts loaded, type a code to auto-generate",
+    "continueSubtag": "Keep typing the subtag…",
+    "generated": "Generated icon for \"{code}\"",
+    "copySuccess": "SVG code copied to clipboard",
+    "copyFail": "Copy failed, please select the text manually"
+  },
+  "errors": {
+    "codeTooLong": "Code is longer than the limit ({len}/4)",
+    "glyphMissing": "Font does not support the character: \"{ch}\"",
+    "primaryTooLong": "Primary tag is longer than the limit ({len}/4)",
+    "extendedFormat": "Extended code must be \"primary-subtag\", e.g. be-tarask",
+    "subtagTooLong": "Subtag \"{subtag}\" is too long to fit even after squeezing and shrinking",
+    "fontLoadFailed": "Font loading failed: {err}"
+  }
+}
