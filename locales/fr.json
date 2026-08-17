@@ -1,0 +1,29 @@
+{
+  "meta": { "code": "fr", "name": "français", "htmlLang": "fr" },
+  "title": "Générateur d'icônes WCL pour langues",
+  "subtitle": "Saisissez un code de langue pour générer son icône SVG en temps réel.",
+  "labelCode": "Code de langue",
+  "placeholder": "ex. zh ou be-tarask",
+  "btnGenerate": "Générer",
+  "btnDownload": "Télécharger le SVG",
+  "btnCopy": "Copier le code SVG",
+  "langSwitcherLabel": "Langue de l'interface",
+  "status": {
+    "loadingFont": "Chargement des polices…",
+    "ready": "Prêt",
+    "idleEmpty": "Saisissez un code pour une génération automatique",
+    "idleFontLoaded": "Polices chargées, saisissez un code pour une génération automatique",
+    "continueSubtag": "Continuez à saisir le sous-code…",
+    "generated": "Icône générée pour \"{code}\"",
+    "copySuccess": "Code SVG copié dans le presse-papiers",
+    "copyFail": "Échec de la copie, veuillez sélectionner le texte manuellement"
+  },
+  "errors": {
+    "codeTooLong": "Le code dépasse la limite ({len}/4)",
+    "glyphMissing": "La police ne prend pas en charge le caractère : \"{ch}\"",
+    "primaryTooLong": "La balise principale dépasse la limite ({len}/4)",
+    "extendedFormat": "Le code étendu doit être de la forme « primary-subtag », ex. be-tarask",
+    "subtagTooLong": "Le sous-code « {subtag} » est trop long pour tenir même après compression et réduction",
+    "fontLoadFailed": "Échec du chargement de la police : {err}"
+  }
+}
