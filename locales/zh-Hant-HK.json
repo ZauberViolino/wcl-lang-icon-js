@@ -6,7 +6,7 @@
   "placeholder": "例如 zh 或 be-tarask",
   "btnGenerate": "生成",
   "btnDownload": "下載 SVG",
-  "btnCopy": "複製 SVG 程式碼",
+  "btnCopy": "複製 SVG 原始碼",
   "langSwitcherLabel": "介面語言",
   "status": {
     "loadingFont": "載入字體中……",
@@ -20,7 +20,7 @@
   },
   "errors": {
     "codeTooLong": "代碼長度超過上限（{len}/4）",
-    "glyphMissing": "字體不支援字元：\"{ch}\"",
+    "glyphMissing": "字體不支援字元：「{ch}」",
     "primaryTooLong": "主標籤長度超過上限（{len}/4）",
     "extendedFormat": "擴充代碼格式應為「主標籤-子標籤」，例如 be-tarask",
     "subtagTooLong": "子標籤「{subtag}」太長，壓縮並縮小後仍放不下",

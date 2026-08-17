@@ -1,7 +1,9 @@
 {
-  "default": "zh-Hans",
+  "default": "zh-Hans-CN",
   "locales": [
-    { "code": "zh-Hans", "name": "中文（简体）" },
-    { "code": "en", "name": "English" }
+    { "code": "en", "name": "English" },
+    { "code": "zh-Hans-CN", "name": "中文（简体，中国大陆）" },
+    { "code": "zh-Hant-HK", "name": "中文（繁體，香港）" },
+    { "code": "zh-Hans-TW", "name": "中文（繁體，臺灣）" }
   ]
 }
