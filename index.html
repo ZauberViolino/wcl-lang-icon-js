@@ -39,7 +39,7 @@
     font-size: 18px;
     margin: 0 0 4px;
   }
-  p.sub {
+  .sub {
     color: var(--muted);
     font-size: 13px;
     margin: 0 0 20px;
@@ -113,14 +113,11 @@
 <body>
   <div class="card">
     <h1>WCL 语言图标生成器</h1>
-    <p class="sub">
-      输入语言代码，实时生成对应的 SVG 图标。<br>
-      普通代码（如 <code>zh</code>、<code>nan</code>）用单行文字；带子标签的扩展代码（如 <code>be-tarask</code>、<code>zh-Hans-CN</code>）会自动排成上下两行。
-    </p>
+    <p class="sub">输入语言代码，实时生成对应的 SVG 图标。</p>
 
     <label for="codeInput">语言代码</label>
     <div class="row">
-      <input id="codeInput" type="text" maxlength="24" placeholder="例如 zh 或 be-tarask" autocomplete="off">
+      <input id="codeInput" type="text" maxlength="30" placeholder="例如 zh 或 be-tarask" autocomplete="off">
       <button id="generateBtn" disabled>生成</button>
     </div>
     <div id="status"></div>
