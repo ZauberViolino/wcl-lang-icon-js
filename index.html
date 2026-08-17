@@ -123,6 +123,25 @@
     min-height: 16px;
   }
   #status.error { color: #e5484d; }
+
+.github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.github-link:hover {
+  color: var(--text);
+}
+
 </style>
 </head>
 <body>
@@ -138,7 +157,7 @@
     <label for="codeInput" data-i18n="labelCode">语言代码</label>
     <div class="row">
       <input id="codeInput" type="text" maxlength="30" data-i18n-placeholder="placeholder" placeholder="例如 zh 或 be-tarask" autocomplete="off">
-      <button id="generateBtn" data-i18n="btnGenerate" disabled>生成</button>
+      <!-- <button id="generateBtn" data-i18n="btnGenerate" disabled>生成</button> -->
     </div>
 
     <div id="preview"><span style="color:#999;font-size:13px;" id="previewIdleText">…</span></div>
@@ -147,6 +166,27 @@
       <button id="downloadBtn" class="secondary" data-i18n="btnDownload" disabled>下载 SVG</button>
       <button id="copyBtn" class="secondary" data-i18n="btnCopy" disabled>复制 SVG 代码</button>
     </div>
+
+	<a
+	class="github-link"
+	href="https://github.com/zauberviolino/wcl-lang-icon-js"
+	target="_blank"
+	rel="noopener noreferrer"
+	>
+	<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+		<path
+		fill="currentColor"
+		d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.63 5.47 7.7.4.08.55-.18.55-.39
+		0-.19-.01-.83-.01-1.5-2.01.45-2.53-.5-2.69-.97-.09-.24-.48-.97-.82-1.16-.28-.16-.68-.56
+		-.01-.57.63-.01 1.08.59 1.23.83.72 1.24 1.87.89 2.33.68.07-.53.28-.89.51-1.09-1.78-.21
+		-3.64-.91-3.64-4.02 0-.89.31-1.62.82-2.19-.08-.2-.36-1.04.08-2.16 0 0 .67-.22 2.2.84
+		.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.06 2.2-.84 2.2-.84.44 1.12.16 1.96.08 2.16
+		.51.57.82 1.3.82 2.19 0 3.12-1.87 3.81-3.65 4.02.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01
+		2.19 0 .21.15.47.55.39A8.13 8.13 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z"
+		/>
+	</svg>
+	<span data-i18n="viewOnGitHub">在 GitHub 上查看</span>
+	</a>
 
   </div>
 
@@ -252,7 +292,7 @@ window.I18N = (function () {
   const FONT2_PATH = 'fonts/Montserrat-Bold.ttf';    // line-2/subtag font (ext.py)
 
   const codeInput   = document.getElementById('codeInput');
-  const generateBtn = document.getElementById('generateBtn');
+  // const generateBtn = document.getElementById('generateBtn');
   const downloadBtn = document.getElementById('downloadBtn');
   const copyBtn     = document.getElementById('copyBtn');
   const preview     = document.getElementById('preview');
@@ -565,7 +605,7 @@ window.I18N = (function () {
     }
   }
 
-  generateBtn.addEventListener('click', generate);
+  //generateBtn.addEventListener('click', generate);
   downloadBtn.addEventListener('click', download);
   copyBtn.addEventListener('click', copySVG);
 
@@ -596,7 +636,7 @@ window.I18N = (function () {
       font1 = f1;
       font2 = f2;
       capHeight2 = getCapHeight(font2);
-      generateBtn.disabled = false;
+      //generateBtn.disabled = false;
       setStatus(t('status.ready'));
       if (codeInput.value.trim()) {
         generate();
