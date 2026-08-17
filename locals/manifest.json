@@ -1,0 +1,7 @@
+{
+  "default": "zh-Hans",
+  "locales": [
+    { "code": "zh-Hans", "name": "中文（简体）" },
+    { "code": "en", "name": "English" }
+  ]
+}
