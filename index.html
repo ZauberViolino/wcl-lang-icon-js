@@ -156,12 +156,18 @@
 
   // ---- batch.py params (single-line codes) ----
   const PARAMS_BY_LEN = {
+    1: { font_size: 470.0, track: -10, cx: 450, cy: 484.5 + 110 },
     2: { font_size: 470.0, track: -10, cx: 450, cy: 484.5 + 110 },
     3: { font_size: 353.3, track: -10, cx: 450, cy: 484.5 + 70 },
     4: { font_size: 280.0, track: -10, cx: 450, cy: 484.5 + 50 },
   };
-  const DEFAULT_PARAMS = { font_size: 300.0, track: -20, cx: 450, cy: 484.5 + 70 };
-  function getParams(code) { return PARAMS_BY_LEN[code.length] || DEFAULT_PARAMS; }
+  function getParams(code) {
+    const p = PARAMS_BY_LEN[code.length];
+    if (!p) {
+      throw new Error('没有针对单行代码长度 ' + code.length + ' 校准的排版参数（仅支持 2-4 位）');
+    }
+    return p;
+  }
 
   // ---- ext.py params (extended "primary-subtag" codes) ----
   const CX = 450;
@@ -279,6 +285,19 @@
     return null;
   }
 
+  // Renders only the ring + primary-tag line, used for the transient
+  // "primary-" state while the user hasn't typed the subtag yet.
+  function buildPrimaryOnlySVG(primary) {
+    const l1p = LINE1_PARAMS_BY_LEN[primary.length];
+    if (!l1p) {
+      throw new Error('没有针对主标签长度 ' + primary.length + ' 校准的排版参数（仅支持 1-4 位）');
+    }
+    const totalW1 = measureWidth(primary, font1, l1p.font_size, l1p.track);
+    const startX1 = CX - totalW1 / 2;
+    const svgLine1 = layoutGlyphs(primary, font1, l1p.font_size, l1p.track, startX1, l1p.cy);
+    return wrapSVG(BADGE_RING + '\n' + svgLine1);
+  }
+
   // ---- extended "primary-subtag" generator (ext.py) ----
   function buildExtendedSVG(code) {
     const dashIdx = code.indexOf('-');
@@ -372,6 +391,27 @@
       showIdle('输入代码后自动生成');
       return;
     }
+
+    // "primary-" with no subtag yet is just mid-typing, not a real error —
+    // preview the primary line alone instead of slamming a red error screen.
+    if (code.endsWith('-') && code.indexOf('-') === code.length - 1) {
+      const primary = code.slice(0, -1);
+      if (!primary) {
+        showIdle('输入代码后自动生成');
+        return;
+      }
+      try {
+        preview.innerHTML = buildPrimaryOnlySVG(primary);
+        currentSVG = null;
+        downloadBtn.disabled = true;
+        copyBtn.disabled = true;
+        setStatus('继续输入子标签…');
+      } catch (e) {
+        showError(e.message);
+      }
+      return;
+    }
+
     try {
       const svg = code.includes('-') ? buildExtendedSVG(code) : buildSimpleSVG(code);
       currentSVG = svg;
