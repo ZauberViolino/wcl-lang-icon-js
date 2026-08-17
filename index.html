@@ -154,7 +154,7 @@
 // =====================================================================
 // i18n module — loads locales/manifest.json + locales/<code>.json,
 // exposes window.I18N.t(key, params) and applies data-i18n attributes.
-// No flags anywhere: the switcher shows "<code> · <self-name>".
+// No flags anywhere: the switcher shows "<self-name>".
 // =====================================================================
 window.I18N = (function () {
   const STORAGE_KEY = 'wcl-lang';
@@ -216,7 +216,7 @@ window.I18N = (function () {
     manifest.locales.forEach(l => {
       const opt = document.createElement('option');
       opt.value = l.code;
-      opt.textContent = l.code + ' · ' + l.name; // code + self-name, never a flag
+      opt.textContent = l.name; // self-name, never a flag
       if (l.code === currentCode) opt.selected = true;
       sel.appendChild(opt);
     });
