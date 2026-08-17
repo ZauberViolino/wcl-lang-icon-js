@@ -1,5 +1,5 @@
 {
-  "meta": { "code": "zh-CN", "name": "中文（简体）", "htmlLang": "zh-CN" },
+  "meta": { "code": "zh-Hans", "name": "中文（简体）", "htmlLang": "zh-Hans" },
   "title": "WCL 语言图标生成器",
   "subtitle": "输入语言代码，实时生成对应的 SVG 图标。",
   "labelCode": "语言代码",
