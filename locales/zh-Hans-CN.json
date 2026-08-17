@@ -8,6 +8,7 @@
   "btnDownload": "下载 SVG",
   "btnCopy": "复制 SVG 代码",
   "langSwitcherLabel": "界面语言",
+  "viewOnGitHub": "在 GitHub 上查看",
   "status": {
     "loadingFont": "加载字体中……",
     "ready": "就绪",

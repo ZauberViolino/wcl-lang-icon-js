@@ -8,6 +8,7 @@
   "btnDownload": "Descargar SVG",
   "btnCopy": "Copiar código SVG",
   "langSwitcherLabel": "Idioma de la interfaz",
+  "viewOnGitHub": "Ver en GitHub",
   "status": {
     "loadingFont": "Cargando fuentes…",
     "ready": "Listo",

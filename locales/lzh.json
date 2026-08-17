@@ -8,11 +8,12 @@
   "btnDownload": "獲之",
   "btnCopy": "鈔之",
   "langSwitcherLabel": "所示語文",
+  "viewOnGitHub": "視於源坊",
   "status": {
     "loadingFont": "方載字體……",
     "ready": "備矣",
     "idleEmpty": "書統號焉，即自生焉",
-    "idleFontLoaded": "字體既載，書統號即自生",
+    "idleFontLoaded": "字集既載，書統號焉，圖符即立自生焉",
     "continueSubtag": "續書子號……",
     "generated": "「{code}」之圖符已生矣",
     "copySuccess": "盈縮矢量圖之源，已鈔於剪貼簿",
@@ -20,10 +21,10 @@
   },
   "errors": {
     "codeTooLong": "統號過長（{len}/4）",
-    "glyphMissing": "字體未刻旃：「{ch}」",
+    "glyphMissing": "「{ch}」字也，匠人未刻，不見於字集之中",
     "primaryTooLong": "母號過長（{len}/4）",
     "extendedFormat": "若欲書擴充之統號，須母號寘首，子號隨之，中以短橫銜接，若「be-tarask」也。",
     "subtagTooLong": "子號「{subtag}」過長，雖窮百術，不得納焉。",
-    "fontLoadFailed": "上窮碧落下黃泉，字體弗見：{err}。"
+    "fontLoadFailed": "上窮碧落下黃泉，字集弗見：{err}。"
   }
 }
