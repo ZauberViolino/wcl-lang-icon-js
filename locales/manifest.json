@@ -1,8 +1,8 @@
 {
   "default": "zh-Hans-CN",
   "locales": [
-    { "code": "es", "name": "español" },
     { "code": "en", "name": "English" },
+    { "code": "es", "name": "español" },
     { "code": "fr", "name": "français" },
     { "code": "lzh", "name": "文言" },
     { "code": "zh-Hans-CN", "name": "中文（简体，中国大陆）" },
