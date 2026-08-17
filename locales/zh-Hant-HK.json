@@ -1,0 +1,29 @@
+{
+  "meta": { "code": "zh-Hant-HK", "name": "中文（繁體，香港）", "htmlLang": "zh-Hant-HK" },
+  "title": "WCL 語言圖標生成器",
+  "subtitle": "輸入語言代碼，即時生成對應的 SVG 圖標。",
+  "labelCode": "語言代碼",
+  "placeholder": "例如 zh 或 be-tarask",
+  "btnGenerate": "生成",
+  "btnDownload": "下載 SVG",
+  "btnCopy": "複製 SVG 原始碼",
+  "langSwitcherLabel": "介面語言",
+  "status": {
+    "loadingFont": "載入字體中……",
+    "ready": "就緒",
+    "idleEmpty": "輸入代碼後自動生成",
+    "idleFontLoaded": "字體已載入，輸入代碼後自動生成",
+    "continueSubtag": "繼續輸入子標籤……",
+    "generated": "已生成「{code}」的圖標",
+    "copySuccess": "SVG 程式碼已複製到剪貼板",
+    "copyFail": "複製失敗，請手動選擇文字"
+  },
+  "errors": {
+    "codeTooLong": "代碼長度超過上限（{len}/4）",
+    "glyphMissing": "字體不支援字元：「{ch}」",
+    "primaryTooLong": "主標籤長度超過上限（{len}/4）",
+    "extendedFormat": "擴充代碼格式應為「主標籤-子標籤」，例如 be-tarask",
+    "subtagTooLong": "子標籤「{subtag}」太長，壓縮並縮小後仍放不下",
+    "fontLoadFailed": "字體載入失敗：{err}"
+  }
+}

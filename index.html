@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <!-- Claude Sonnet 5 -->
+<html lang="zh-Hans-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WCL 语言图标生成器</title>
+<title data-i18n="title">WCL 语言图标生成器</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/1.3.4/opentype.min.js"></script>
 <style>
   :root {
@@ -34,7 +33,23 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 28px;
+    position: relative;
   }
+  .top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+  }
+  #langSwitcher {
+    background: #0f1113;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  #langSwitcher:focus { outline: none; border-color: var(--accent); }
   h1 {
     font-size: 18px;
     margin: 0 0 4px;
@@ -112,24 +127,124 @@
 </head>
 <body>
   <div class="card">
-    <h1>WCL 语言图标生成器</h1>
-    <p class="sub">输入语言代码，实时生成对应的 SVG 图标。</p>
-    <div id="status"></div>
-
-    <label for="codeInput">语言代码</label>
-    <div class="row">
-      <input id="codeInput" type="text" maxlength="30" placeholder="例如 zh 或 be-tarask" autocomplete="off">
-      <button id="generateBtn" disabled>生成</button>
+    <div class="top-bar">
+      <select id="langSwitcher" aria-label="Interface language"></select>
     </div>
 
-    <div id="preview"><span style="color:#999;font-size:13px;">加载字体中…</span></div>
+    <h1 data-i18n="title">WCL 语言图标生成器</h1>
+    <p class="sub" data-i18n="subtitle">输入语言代码，实时生成对应的 SVG 图标。</p>
+    <div id="status"></div>
+
+    <label for="codeInput" data-i18n="labelCode">语言代码</label>
+    <div class="row">
+      <input id="codeInput" type="text" maxlength="30" data-i18n-placeholder="placeholder" placeholder="例如 zh 或 be-tarask" autocomplete="off">
+      <button id="generateBtn" data-i18n="btnGenerate" disabled>生成</button>
+    </div>
+
+    <div id="preview"><span style="color:#999;font-size:13px;" id="previewIdleText">…</span></div>
 
     <div class="actions">
-      <button id="downloadBtn" class="secondary" disabled>下载 SVG</button>
-      <button id="copyBtn" class="secondary" disabled>复制 SVG 代码</button>
+      <button id="downloadBtn" class="secondary" data-i18n="btnDownload" disabled>下载 SVG</button>
+      <button id="copyBtn" class="secondary" data-i18n="btnCopy" disabled>复制 SVG 代码</button>
     </div>
 
   </div>
+
+<script>
+// =====================================================================
+// i18n module — loads locales/manifest.json + locales/<code>.json,
+// exposes window.I18N.t(key, params) and applies data-i18n attributes.
+// No flags anywhere: the switcher shows "<code> · <self-name>".
+// =====================================================================
+window.I18N = (function () {
+  const STORAGE_KEY = 'wcl-lang';
+  let manifest = null;   // { default, locales: [{code, name}] }
+  let dict = {};         // currently loaded translation object
+  let currentCode = null;
+  const listeners = [];
+
+  function get(obj, path) {
+    return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
+  }
+
+  function t(key, params) {
+    let str = get(dict, key);
+    if (str === undefined) return key; // untranslated fallback: show the key itself
+    if (params) {
+      for (const k in params) {
+        str = str.replace('{' + k + '}', params[k]);
+      }
+    }
+    return str;
+  }
+
+  async function fetchJSON(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error('Failed to fetch ' + path);
+    return res.json();
+  }
+
+  function detectLocale() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const codes = manifest.locales.map(l => l.code);
+    if (saved && codes.includes(saved)) return saved;
+
+    const browserLangs = navigator.languages || [navigator.language];
+    for (const bl of browserLangs) {
+      if (codes.includes(bl)) return bl;
+      const prefix = bl.split('-')[0];
+      const match = codes.find(c => c.split('-')[0] === prefix);
+      if (match) return match;
+    }
+    return manifest.default;
+  }
+
+  function applyStaticTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+    });
+    document.title = t('title');
+    document.documentElement.lang = get(dict, 'meta.htmlLang') || currentCode;
+  }
+
+  function buildSwitcher() {
+    const sel = document.getElementById('langSwitcher');
+    sel.innerHTML = '';
+    manifest.locales.forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.code;
+      opt.textContent = l.code + ' · ' + l.name; // code + self-name, never a flag
+      if (l.code === currentCode) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.onchange = async () => {
+      await setLocale(sel.value);
+    };
+  }
+
+  async function setLocale(code) {
+    dict = await fetchJSON('locales/' + code + '.json');
+    currentCode = code;
+    localStorage.setItem(STORAGE_KEY, code);
+    applyStaticTranslations();
+    listeners.forEach(fn => fn(code));
+  }
+
+  async function init() {
+    manifest = await fetchJSON('locales/manifest.json');
+    const initial = detectLocale();
+    await setLocale(initial);
+    buildSwitcher();
+  }
+
+  function onChange(fn) { listeners.push(fn); }
+
+  return { init, t, onChange, get currentCode() { return currentCode; } };
+})();
+</script>
 
 <script>
 (function () {
@@ -142,6 +257,8 @@
   const copyBtn     = document.getElementById('copyBtn');
   const preview     = document.getElementById('preview');
   const statusEl    = document.getElementById('status');
+
+  const t = window.I18N.t; // shorthand
 
   let font1 = null, font2 = null, capHeight2 = null;
   let currentSVG = null;
@@ -164,7 +281,7 @@
   function getParams(code) {
     const p = PARAMS_BY_LEN[code.length];
     if (!p) {
-      throw new Error('代码长度超过上限（' + code.length + '/4）');
+      throw new Error(t('errors.codeTooLong', { len: code.length }));
     }
     return p;
   }
@@ -194,7 +311,7 @@
   function requireGlyph(font, ch) {
     const glyph = font.charToGlyph(ch);
     if (!glyph || glyph.index === 0) {
-      throw new Error('字体不支持字符: "' + ch + '"');
+      throw new Error(t('errors.glyphMissing', { ch: ch }));
     }
     return glyph;
   }
@@ -290,7 +407,7 @@
   function buildPrimaryOnlySVG(primary) {
     const l1p = LINE1_PARAMS_BY_LEN[primary.length];
     if (!l1p) {
-      throw new Error('主标签长度超过上限（' + primary.length + '/4）');
+      throw new Error(t('errors.primaryTooLong', { len: primary.length }));
     }
     const totalW1 = measureWidth(primary, font1, l1p.font_size, l1p.track);
     const startX1 = CX - totalW1 / 2;
@@ -304,12 +421,12 @@
     const primary = code.slice(0, dashIdx);
     const subtag = code.slice(dashIdx + 1);
     if (!primary || !subtag) {
-      throw new Error('扩展代码格式应为 "主标签-子标签"，例如 be-tarask');
+      throw new Error(t('errors.extendedFormat'));
     }
 
     const l1p = LINE1_PARAMS_BY_LEN[primary.length];
     if (!l1p) {
-      throw new Error('主标签长度超过上限（' + primary.length + '/4）');
+      throw new Error(t('errors.primaryTooLong', { len: primary.length }));
     }
 
     // Line 1 (primary tag, monospace font).
@@ -333,7 +450,7 @@
       sx = SX_THRESHOLD_1;
       const fontScale = solveFontScale(totalW2, sx);
       if (fontScale === null || fontScale < FONT_SCALE_MIN) {
-        throw new Error('子标签 "' + subtag + '" 太长，压缩+缩小后仍放不下');
+        throw new Error(t('errors.subtagTooLong', { subtag: subtag }));
       }
       fontSize2 = LINE2_FONT_SIZE * fontScale;
       track2 = LINE2_TRACK * fontScale;
@@ -388,7 +505,7 @@
     if (!font1 || !font2) return; // fonts not ready yet, ignore silently
     const code = codeInput.value.trim();
     if (!code) {
-      showIdle('输入代码后自动生成');
+      showIdle(t('status.idleEmpty'));
       return;
     }
 
@@ -397,7 +514,7 @@
     if (code.endsWith('-') && code.indexOf('-') === code.length - 1) {
       const primary = code.slice(0, -1);
       if (!primary) {
-        showIdle('输入代码后自动生成');
+        showIdle(t('status.idleEmpty'));
         return;
       }
       try {
@@ -405,7 +522,7 @@
         currentSVG = null;
         downloadBtn.disabled = true;
         copyBtn.disabled = true;
-        setStatus('继续输入子标签…');
+        setStatus(t('status.continueSubtag'));
       } catch (e) {
         showError(e.message);
       }
@@ -419,7 +536,7 @@
       preview.innerHTML = currentSVG;
       downloadBtn.disabled = false;
       copyBtn.disabled = false;
-      setStatus('已生成 "' + code + '" 的图标');
+      setStatus(t('status.generated', { code: code }));
     } catch (e) {
       showError(e.message);
     }
@@ -442,9 +559,9 @@
     if (!currentSVG) return;
     try {
       await navigator.clipboard.writeText(currentSVG);
-      setStatus('SVG 代码已复制到剪贴板');
+      setStatus(t('status.copySuccess'));
     } catch (e) {
-      setStatus('复制失败，请手动选择文本', true);
+      setStatus(t('status.copyFail'), true);
     }
   }
 
@@ -473,20 +590,37 @@
     });
   }
 
-  Promise.all([loadFont(FONT1_PATH), loadFont(FONT2_PATH)]).then(([f1, f2]) => {
-    font1 = f1;
-    font2 = f2;
-    capHeight2 = getCapHeight(font2);
-    generateBtn.disabled = false;
-    setStatus('就绪');
-    if (codeInput.value.trim()) {
-      generate();
-    } else {
-      showIdle('字体已加载，输入代码后自动生成');
+  function loadFonts() {
+    document.getElementById('previewIdleText').textContent = t('status.loadingFont');
+    Promise.all([loadFont(FONT1_PATH), loadFont(FONT2_PATH)]).then(([f1, f2]) => {
+      font1 = f1;
+      font2 = f2;
+      capHeight2 = getCapHeight(font2);
+      generateBtn.disabled = false;
+      setStatus(t('status.ready'));
+      if (codeInput.value.trim()) {
+        generate();
+      } else {
+        showIdle(t('status.idleFontLoaded'));
+      }
+    }).catch((err) => {
+      showError(t('errors.fontLoadFailed', { err: err }));
+    });
+  }
+
+  // Re-render everything (static labels already handled by I18N module;
+  // here we just refresh whatever dynamic message is currently showing).
+  window.I18N.onChange(function () {
+    if (!font1 || !font2) {
+      document.getElementById('previewIdleText').textContent = t('status.loadingFont');
+      return;
     }
-  }).catch((err) => {
-    showError('字体加载失败：' + err);
+    generate();
   });
+
+  // Boot: i18n first (so the very first paint is already in the right
+  // language), then start loading the fonts.
+  window.I18N.init().then(loadFonts);
 })();
 </script>
 </body>
