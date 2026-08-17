@@ -164,7 +164,7 @@
   function getParams(code) {
     const p = PARAMS_BY_LEN[code.length];
     if (!p) {
-      throw new Error('没有针对单行代码长度 ' + code.length + ' 校准的排版参数（仅支持 2-4 位）');
+      throw new Error('代码长度超过上限（' + code.length + '/4）');
     }
     return p;
   }
@@ -290,7 +290,7 @@
   function buildPrimaryOnlySVG(primary) {
     const l1p = LINE1_PARAMS_BY_LEN[primary.length];
     if (!l1p) {
-      throw new Error('没有针对主标签长度 ' + primary.length + ' 校准的排版参数（仅支持 1-4 位）');
+      throw new Error('主标签长度超过上限（' + primary.length + '/4）');
     }
     const totalW1 = measureWidth(primary, font1, l1p.font_size, l1p.track);
     const startX1 = CX - totalW1 / 2;
