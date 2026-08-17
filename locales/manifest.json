@@ -6,6 +6,7 @@
     { "code": "fr", "name": "français" },
     { "code": "zh-Hans-CN", "name": "中文（简体，中国大陆）" },
     { "code": "zh-Hant-HK", "name": "中文（繁體，香港）" },
-    { "code": "zh-Hant-TW", "name": "中文（繁體，臺灣）" }
+    { "code": "zh-Hant-TW", "name": "中文（繁體，臺灣）" },
+    { "code": "lzh", "name": "文言" }
   ]
 }
