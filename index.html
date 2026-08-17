@@ -335,24 +335,53 @@
       inner + '\n</svg>\n';
   }
 
+  function escapeHTML(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  // Neutral idle state (empty input / fonts still loading) — no red, no drama.
+  function showIdle(msg) {
+    currentSVG = null;
+    downloadBtn.disabled = true;
+    copyBtn.disabled = true;
+    preview.innerHTML = '<span style="color:#999;font-size:13px;">' + escapeHTML(msg) + '</span>';
+    setStatus('');
+  }
+
+  // Error state: wipe the canvas and put the error ON it, big and red,
+  // so it can't be missed (instead of leaving stale artwork on screen).
+  function showError(msg) {
+    currentSVG = null;
+    downloadBtn.disabled = true;
+    copyBtn.disabled = true;
+    preview.innerHTML =
+      '<div style="width:100%;height:100%;background:#e5484d;display:flex;flex-direction:column;' +
+      'align-items:center;justify-content:center;padding:24px;text-align:center;color:#fff;box-sizing:border-box;">' +
+      '<div style="font-size:44px;line-height:1;margin-bottom:10px;">&#9888;&#65039;</div>' +
+      '<div style="font-size:14px;font-weight:600;word-break:break-word;">' + escapeHTML(msg) + '</div>' +
+      '</div>';
+    setStatus(msg, true);
+  }
+
   function generate() {
+    if (!font1 || !font2) return; // fonts not ready yet, ignore silently
     const code = codeInput.value.trim();
     if (!code) {
-      setStatus('请输入一个语言代码', true);
+      showIdle('输入代码后自动生成');
       return;
     }
     try {
-      currentSVG = code.includes('-') ? buildExtendedSVG(code) : buildSimpleSVG(code);
+      const svg = code.includes('-') ? buildExtendedSVG(code) : buildSimpleSVG(code);
+      currentSVG = svg;
       currentCode = code;
       preview.innerHTML = currentSVG;
       downloadBtn.disabled = false;
       copyBtn.disabled = false;
       setStatus('已生成 "' + code + '" 的图标');
     } catch (e) {
-      currentSVG = null;
-      downloadBtn.disabled = true;
-      copyBtn.disabled = true;
-      setStatus(e.message, true);
+      showError(e.message);
     }
   }
 
@@ -382,13 +411,20 @@
   generateBtn.addEventListener('click', generate);
   downloadBtn.addEventListener('click', download);
   copyBtn.addEventListener('click', copySVG);
+
+  // Real-time rendering: regenerate on every keystroke, lightly debounced
+  // so a burst of fast typing doesn't fire dozens of rebuilds back to back.
+  let debounceTimer = null;
+  function scheduleGenerate() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(generate, 120);
+  }
+  codeInput.addEventListener('input', scheduleGenerate);
   codeInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') generate();
-  });
-  codeInput.addEventListener('input', function () {
-    // Lowercase everything except don't touch it if user is mid-typing an
-    // extended code's subtag casing on purpose (e.g. zh-Hans) -- keep as-is,
-    // the original scripts don't force-case the code either.
+    if (e.key === 'Enter') {
+      clearTimeout(debounceTimer);
+      generate();
+    }
   });
 
   function loadFont(path) {
@@ -402,11 +438,14 @@
     font2 = f2;
     capHeight2 = getCapHeight(font2);
     generateBtn.disabled = false;
-    preview.innerHTML = '<span style="color:#999;font-size:13px;">字体已加载，输入代码后点击生成</span>';
     setStatus('就绪');
+    if (codeInput.value.trim()) {
+      generate();
+    } else {
+      showIdle('字体已加载，输入代码后自动生成');
+    }
   }).catch((err) => {
-    preview.innerHTML = '';
-    setStatus('字体加载失败：' + err, true);
+    showError('字体加载失败：' + err);
   });
 })();
 </script>
