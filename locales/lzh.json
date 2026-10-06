@@ -1,7 +1,7 @@
 {
   "meta": { "code": "lzh", "name": "文言", "htmlLang": "lzh-Hant" },
   "title": "衆徽式語文圖符製器",
-  "subtitle": "填入語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
+  "subtitle": "書語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
   "labelCode": "語文統號",
   "placeholder": "如「zh」，如「be-tarask」",
   "btnGenerate": "生之",
@@ -13,7 +13,7 @@
     "loadingFont": "方載字體……",
     "ready": "備矣",
     "idleEmpty": "書統號焉，即自生焉",
-    "idleFontLoaded": "字集既載，書統號焉，圖符即立自生焉",
+    "idleFontLoaded": "字集既載，請書統號，圖符即立自生焉",
     "continueSubtag": "續書子號……",
     "generated": "「{code}」之圖符已生矣",
     "copySuccess": "盈縮矢量圖之源，已鈔於剪貼簿",
