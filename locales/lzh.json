@@ -5,7 +5,7 @@
     "htmlLang": "lzh-Hant"
   },
   "title": "衆徽式語文圖符製器",
-  "subtitle": "填入語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
+  "subtitle": "書語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
   "labelCode": "語文統號",
   "placeholder": "如「zh」，如「be-tarask」",
   "btnGenerate": "生之",
@@ -32,21 +32,21 @@
     "fontLoadFailed": "上窮碧落下黃泉，字集弗見：{err}。"
   },
   "batch": {
-    "title": "批量生成",
-    "fileLabel": "或上傳 .txt / .csv 檔",
-    "placeholder": "每行一碼，或以逗號分隔，如 zh, ja, be-tarask",
-    "btnZip": "生成並下載 ZIP",
+    "title": "羣生圖符",
+    "fileLabel": "或遣純文檔，或遣讀絕檔",
+    "placeholder": "或逐行書統號，或以讀號絕諸行內，如「zh, ja, be-tarask」",
+    "btnZip": "羣生圖符，獲紮檔",
     "status": {
-      "fontsNotReady": "字體尚在載入",
-      "noCodes": "請至少輸入一個語言代碼",
-      "jszipFail": "JSZip 載入失敗，無法打包",
-      "allFailed": "諸碼皆敗，未生成檔案（敗 {failed} 個）",
-      "done": "成 {ok} 個，敗 {failed} 個{hint}",
-      "doneHint": "（詳見 ZIP 內 errors.txt）",
-      "error": "批量生成出錯：{err}"
+      "fontsNotReady": "字集尚未載畢，其稍安",
+      "noCodes": "古人云：「巧婦難爲無米之炊。」請書統號，方能生圖。",
+      "jszipFail": "嗚呼，爪哇紮之術弗見，無以紮檔",
+      "allFailed": "嗚呼，諸碼皆敗，弗能生焉（捐{failed}）",
+      "done": "成{ok}，敗{failed}。{hint}",
+      "doneHint": "（詳覽紮檔內之純文檔errors.txt）",
+      "error": "嗚呼：{err}"
     },
     "errors": {
-      "subtagMissing": "未填子標籤"
+      "subtagMissing": "未書子號"
     }
   }
 }
