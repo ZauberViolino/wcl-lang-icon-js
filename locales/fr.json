@@ -1,5 +1,9 @@
 {
-  "meta": { "code": "fr", "name": "français", "htmlLang": "fr" },
+  "meta": {
+    "code": "fr",
+    "name": "français",
+    "htmlLang": "fr"
+  },
   "title": "Générateur d'icônes WCL pour langues",
   "subtitle": "Saisissez un code de langue pour générer son icône SVG en temps réel.",
   "labelCode": "Code de langue",
@@ -26,5 +30,23 @@
     "extendedFormat": "Le code étendu doit être de la forme « primary-subtag », ex. be-tarask",
     "subtagTooLong": "Le sous-code « {subtag} » est trop long pour tenir même après compression et réduction",
     "fontLoadFailed": "Échec du chargement de la police : {err}"
+  },
+  "batch": {
+    "title": "Génération par lot",
+    "fileLabel": "Ou importez un fichier .txt / .csv",
+    "placeholder": "Un code par ligne ou séparés par des virgules, ex. zh, ja, be-tarask",
+    "btnZip": "Générer et télécharger le ZIP",
+    "status": {
+      "fontsNotReady": "Les polices sont encore en cours de chargement",
+      "noCodes": "Saisissez au moins un code de langue",
+      "jszipFail": "Échec du chargement de JSZip, impossible de créer le ZIP",
+      "allFailed": "Tous les codes ont échoué, aucun fichier généré ({failed} échecs)",
+      "done": "Terminé : {ok} réussis, {failed} échecs{hint}",
+      "doneHint": " (voir errors.txt dans le ZIP)",
+      "error": "Erreur de lot : {err}"
+    },
+    "errors": {
+      "subtagMissing": "Sous-étiquette non renseignée"
+    }
   }
 }

@@ -1,5 +1,9 @@
 {
-  "meta": { "code": "en", "name": "English", "htmlLang": "en" },
+  "meta": {
+    "code": "en",
+    "name": "English",
+    "htmlLang": "en"
+  },
   "title": "WCL Language Icon Generator",
   "subtitle": "Type a language code to generate its SVG icon in real time.",
   "labelCode": "Language code",
@@ -26,5 +30,23 @@
     "extendedFormat": "Extended code must be \"primary-subtag\", e.g. be-tarask",
     "subtagTooLong": "Subtag \"{subtag}\" is too long to fit even after squeezing and shrinking",
     "fontLoadFailed": "Font loading failed: {err}"
+  },
+  "batch": {
+    "title": "Batch generate",
+    "fileLabel": "Or upload a .txt / .csv file",
+    "placeholder": "One code per line, or separate with commas, e.g. zh, ja, be-tarask",
+    "btnZip": "Generate & download ZIP",
+    "status": {
+      "fontsNotReady": "Fonts are still loading",
+      "noCodes": "Enter at least one language code",
+      "jszipFail": "Failed to load JSZip, cannot build the ZIP",
+      "allFailed": "All codes failed, no file generated ({failed} failed)",
+      "done": "Done: {ok} succeeded, {failed} failed{hint}",
+      "doneHint": " (see errors.txt in the ZIP)",
+      "error": "Batch error: {err}"
+    },
+    "errors": {
+      "subtagMissing": "Subtag not filled in"
+    }
   }
 }

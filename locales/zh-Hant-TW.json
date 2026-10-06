@@ -1,5 +1,9 @@
 {
-  "meta": { "code": "zh-Hant-TW", "name": "中文（繁體，臺灣）", "htmlLang": "zh-Hant-TW" },
+  "meta": {
+    "code": "zh-Hant-TW",
+    "name": "中文（繁體，臺灣）",
+    "htmlLang": "zh-Hant-TW"
+  },
   "title": "WCL 語言圖示產生器",
   "subtitle": "輸入語言代碼，即時產生對應的 SVG 圖示。",
   "labelCode": "語言代碼",
@@ -26,5 +30,23 @@
     "extendedFormat": "擴充代碼格式應為「主標籤-子標籤」，例如 be-tarask",
     "subtagTooLong": "子標籤「{subtag}」太長，壓縮+縮小後仍放不下",
     "fontLoadFailed": "字型載入失敗：{err}"
+  },
+  "batch": {
+    "title": "批次生成",
+    "fileLabel": "或上傳 .txt / .csv 檔案",
+    "placeholder": "每行一個代碼，或用逗號分隔，例如 zh, ja, be-tarask",
+    "btnZip": "批次生成並下載 ZIP",
+    "status": {
+      "fontsNotReady": "字型尚未載入完成",
+      "noCodes": "請輸入至少一個語言代碼",
+      "jszipFail": "JSZip 載入失敗，無法打包",
+      "allFailed": "全部失敗，未產生檔案（失敗 {failed} 個）",
+      "done": "完成：成功 {ok} 個，失敗 {failed} 個{hint}",
+      "doneHint": "（詳見 ZIP 內 errors.txt）",
+      "error": "批次生成出錯：{err}"
+    },
+    "errors": {
+      "subtagMissing": "子標籤未填寫"
+    }
   }
 }

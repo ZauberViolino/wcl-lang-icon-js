@@ -1,5 +1,9 @@
 {
-  "meta": { "code": "es", "name": "español", "htmlLang": "es" },
+  "meta": {
+    "code": "es",
+    "name": "español",
+    "htmlLang": "es"
+  },
   "title": "Generador de iconos WCL para idiomas",
   "subtitle": "Escribe un código de idioma para generar su icono SVG en tiempo real.",
   "labelCode": "Código de idioma",
@@ -26,5 +30,23 @@
     "extendedFormat": "El código extendido debe ser \"primary-subtag\", p.ej. be-tarask",
     "subtagTooLong": "El subtag \"{subtag}\" es demasiado largo incluso después de ajustar y reducir",
     "fontLoadFailed": "Error al cargar la fuente: {err}"
+  },
+  "batch": {
+    "title": "Generación por lotes",
+    "fileLabel": "O sube un archivo .txt / .csv",
+    "placeholder": "Un código por línea o separados por comas, p. ej. zh, ja, be-tarask",
+    "btnZip": "Generar y descargar ZIP",
+    "status": {
+      "fontsNotReady": "Las fuentes aún se están cargando",
+      "noCodes": "Introduce al menos un código de idioma",
+      "jszipFail": "No se pudo cargar JSZip, no se puede crear el ZIP",
+      "allFailed": "Todos los códigos fallaron, no se generó ningún archivo ({failed} fallidos)",
+      "done": "Listo: {ok} correctos, {failed} fallidos{hint}",
+      "doneHint": " (consulta errors.txt dentro del ZIP)",
+      "error": "Error por lotes: {err}"
+    },
+    "errors": {
+      "subtagMissing": "Falta el subetiqueta"
+    }
   }
 }

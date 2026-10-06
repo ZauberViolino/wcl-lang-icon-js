@@ -1,7 +1,11 @@
 {
-  "meta": { "code": "lzh", "name": "文言", "htmlLang": "lzh-Hant" },
+  "meta": {
+    "code": "lzh",
+    "name": "文言",
+    "htmlLang": "lzh-Hant"
+  },
   "title": "衆徽式語文圖符製器",
-  "subtitle": "書語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
+  "subtitle": "填入語文之統號，圖符即立自生焉。圖符者，盈縮矢量圖之術也。",
   "labelCode": "語文統號",
   "placeholder": "如「zh」，如「be-tarask」",
   "btnGenerate": "生之",
@@ -13,7 +17,7 @@
     "loadingFont": "方載字體……",
     "ready": "備矣",
     "idleEmpty": "書統號焉，即自生焉",
-    "idleFontLoaded": "字集既載，請書統號，圖符即立自生焉",
+    "idleFontLoaded": "字集既載，書統號焉，圖符即立自生焉",
     "continueSubtag": "續書子號……",
     "generated": "「{code}」之圖符已生矣",
     "copySuccess": "盈縮矢量圖之源，已鈔於剪貼簿",
@@ -26,5 +30,23 @@
     "extendedFormat": "若欲書擴充之統號，須母號寘首，子號隨之，中以短橫銜接，若「be-tarask」也。",
     "subtagTooLong": "子號「{subtag}」過長，雖窮百術，不得納焉。",
     "fontLoadFailed": "上窮碧落下黃泉，字集弗見：{err}。"
+  },
+  "batch": {
+    "title": "批量生成",
+    "fileLabel": "或上傳 .txt / .csv 檔",
+    "placeholder": "每行一碼，或以逗號分隔，如 zh, ja, be-tarask",
+    "btnZip": "生成並下載 ZIP",
+    "status": {
+      "fontsNotReady": "字體尚在載入",
+      "noCodes": "請至少輸入一個語言代碼",
+      "jszipFail": "JSZip 載入失敗，無法打包",
+      "allFailed": "諸碼皆敗，未生成檔案（敗 {failed} 個）",
+      "done": "成 {ok} 個，敗 {failed} 個{hint}",
+      "doneHint": "（詳見 ZIP 內 errors.txt）",
+      "error": "批量生成出錯：{err}"
+    },
+    "errors": {
+      "subtagMissing": "未填子標籤"
+    }
   }
 }
