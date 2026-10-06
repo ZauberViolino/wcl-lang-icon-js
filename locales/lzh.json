@@ -39,7 +39,7 @@
     "status": {
       "fontsNotReady": "字集尚未載畢，其稍安",
       "noCodes": "古人云：「巧婦難爲無米之炊。」請書統號，方能生圖。",
-      "jszipFail": "嗚呼，爪哇紮之術弗見，無以紮檔",
+      "jszipFail": "嗚呼，爪哇手稿紮之術弗見，無以紮檔",
       "allFailed": "嗚呼，諸碼皆敗，弗能生焉（捐{failed}）",
       "done": "成{ok}，敗{failed}。{hint}",
       "doneHint": "（詳覽紮檔內之純文檔errors.txt）",
